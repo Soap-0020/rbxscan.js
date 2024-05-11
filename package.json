@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "https-proxy-agent": "^7.0.4",
+    "node-fetch": "^2.7.0",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.11",
+    "@types/node-fetch": "^2.6.11"
+  },
+  "name": "rbxscan.js",
+  "version": "1.0.0",
+  "description": "A JavaScript/TypeScript wrapper to scan roblox assets.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc"
+  },
+  "author": "Soap-0020",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Soap-0020/rbxscan.js"
+  },
+  "keywords": []
+}
