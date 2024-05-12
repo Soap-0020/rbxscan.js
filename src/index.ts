@@ -24,7 +24,7 @@ class Scanner {
     this.listener = new EventEmitter();
     this.onScan = (callback) => this.listener.on("scan", callback);
     if (this.cookies.length == 0 || this.proxies.length == 0)
-      throw new Error("You need at least 1 cookie");
+      throw new Error("You need at least 1 cookie and proxy");
 
     startScanning(this);
   }

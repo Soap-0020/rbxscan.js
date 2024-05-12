@@ -1,6 +1,10 @@
 # What Is rbxscan.js
 
-> rbxscan.js allows you to easily scan roblox assets using proxies
+rbxscan.js allows you to easily scan roblox assets using proxies
+
+# How Do I Install It?
+
+Run "npm install rbxscan.js"
 
 # Usage
 
