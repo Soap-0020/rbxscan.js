@@ -3,8 +3,8 @@ type Proxy = {
   host: string;
   port: string | number;
 
-  username?: string;
-  password?: string;
+  username: string;
+  password: string;
 };
 
 export default Proxy;

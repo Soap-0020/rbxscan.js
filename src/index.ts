@@ -13,6 +13,7 @@ class Scanner {
   currentAssetId: number;
   lastUsedProxyIndex: number | null;
   lastUsedCookieIndex: number | null;
+  timeout: number;
   onScan: (callback: (asset: Asset) => any) => any;
 
   constructor(config: Config) {
@@ -20,6 +21,7 @@ class Scanner {
     this.cookies = config.cookies;
     this.startId = config.startId;
     this.assetsPerScan = config.assetsPerScan;
+    this.timeout = config.timeout ?? 1000;
 
     this.currentAssetId = config.startId;
 

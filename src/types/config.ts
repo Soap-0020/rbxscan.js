@@ -5,6 +5,8 @@ type Config = {
   startId: number;
   proxies: Proxy[];
   cookies: string[];
+
+  timeout?: number;
 };
 
 export default Config;

@@ -13,7 +13,8 @@ import { Scanner } from "rbxscan.js"; // or using the require() funciton
 
 const scanner = new Scanner({
   assetsPerScan: 550,
-  startId: 34324243242,
+  timeout: 500, // the speed in ms between each scan (optinal)
+  startId: 34324243242, // The starting asset id of the scanner
   proxies: [
     {
       protocol: "http",

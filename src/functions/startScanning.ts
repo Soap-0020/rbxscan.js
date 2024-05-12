@@ -14,7 +14,7 @@ const startScanning = async (scanner: Scanner): Promise<void> => {
       assets.sort((a, b) => b.id - a.id)[0]?.id ?? scanner.currentAssetId;
     assets.reverse().forEach((asset) => scanner.listener.emit("scan", asset));
 
-    await new Promise((e) => setTimeout(e, 1000));
+    await new Promise((e) => setTimeout(e, scanner.timeout));
   }
 };
 
