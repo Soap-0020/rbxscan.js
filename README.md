@@ -9,7 +9,7 @@ Run "npm install rbxscan.js"
 # Usage
 
 ```ts
-import Scanner from "rbxscan.js"; // or using the require() funciton
+import { Scanner } from "rbxscan.js"; // or using the require() funciton
 
 const scanner = new Scanner({
   assetsPerSecond: 550,
