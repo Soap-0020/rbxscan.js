@@ -1,4 +1,4 @@
-import Scanner from "..";
+import { Scanner } from "..";
 import getAssets from "./getAssets";
 
 const startScanning = async (scanner: Scanner): Promise<void> => {
