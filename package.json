@@ -9,7 +9,7 @@
     "@types/node-fetch": "^2.6.11"
   },
   "name": "rbxscan.js",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A JavaScript/TypeScript wrapper to scan roblox assets.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

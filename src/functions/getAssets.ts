@@ -32,7 +32,7 @@ const fetchAssests = async (
 
   const json = await request.json();
 
-  if (json?.errors) throw new Error(json.errors[0].message);
+  if (json?.errors) return [];
   return json.data;
 };
 
