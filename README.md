@@ -12,7 +12,7 @@ Run "npm install rbxscan.js"
 import { Scanner } from "rbxscan.js"; // or using the require() funciton
 
 const scanner = new Scanner({
-  assetsPerSecond: 550,
+  assetsPerScan: 550,
   startId: 34324243242,
   proxies: [
     {

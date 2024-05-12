@@ -5,7 +5,7 @@ const startScanning = async (scanner: Scanner): Promise<void> => {
   while (true) {
     const assets = await getAssets(
       scanner,
-      new Array(scanner.assetsPerSecond)
+      new Array(scanner.assetsPerScan)
         .fill("")
         .map((_, index) => scanner.currentAssetId + index + 1)
     );

@@ -9,7 +9,7 @@ class Scanner {
   proxies: Proxy[];
   cookies: string[];
   startId: number;
-  assetsPerSecond: number;
+  assetsPerScan: number;
   currentAssetId: number;
   lastUsedProxyIndex: number | null;
   lastUsedCookieIndex: number | null;
@@ -19,7 +19,7 @@ class Scanner {
     this.proxies = config.proxies;
     this.cookies = config.cookies;
     this.startId = config.startId;
-    this.assetsPerSecond = config.assetsPerSecond;
+    this.assetsPerScan = config.assetsPerScan;
 
     this.currentAssetId = config.startId;
 

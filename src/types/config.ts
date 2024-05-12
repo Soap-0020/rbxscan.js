@@ -1,7 +1,7 @@
 import Proxy from "./proxy";
 
 type Config = {
-  assetsPerSecond: number;
+  assetsPerScan: number;
   startId: number;
   proxies: Proxy[];
   cookies: string[];
