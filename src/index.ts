@@ -30,4 +30,4 @@ class Scanner {
   }
 }
 
-export { Scanner };
+export default Scanner;

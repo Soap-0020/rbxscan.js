@@ -1,4 +1,4 @@
-import { Scanner } from "..";
+import Scanner from "..";
 import Asset from "../types/asset";
 import Proxy from "../types/proxy";
 import getRandomIndex from "./getRandomIndex";
