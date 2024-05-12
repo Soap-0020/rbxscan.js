@@ -1,10 +1,9 @@
 import { Scanner } from "..";
 import Asset from "../types/asset";
 import Proxy from "../types/proxy";
-import getRandomIndex from "./getRandomIndex";
-
 import fetch from "node-fetch";
 import { HttpsProxyAgent } from "https-proxy-agent";
+import getNextIndex from "./getNextIndex";
 
 const fetchAssests = async (
   assets: number[],
@@ -45,11 +44,23 @@ const getAssets = async (
   const fetchPromises: Promise<Asset[]>[] = [];
 
   for (const page of new Array(pages).fill("").map((_, index) => index + 1)) {
-    fetchPromises.push(
+    const proxyIndex = getNextIndex(
+      scanner.proxies,
+      scanner.lastUsedProxyIndex
+    );
+    scanner.lastUsedProxyIndex = proxyIndex;
+
+    const cookieIndex = getNextIndex(
+      scanner.cookies,
+      scanner.lastUsedCookieIndex
+    );
+    scanner.lastUsedCookieIndex = cookieIndex;
+
+    scanner.lastUsedProxyIndex = fetchPromises.push(
       fetchAssests(
         assets.slice((page - 1) * 50, page * 50),
-        getRandomIndex(scanner.proxies),
-        getRandomIndex(scanner.cookies)
+        scanner.proxies[proxyIndex],
+        scanner.cookies[cookieIndex]
       )
     );
   }

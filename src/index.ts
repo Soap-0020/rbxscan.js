@@ -11,6 +11,8 @@ class Scanner {
   startId: number;
   assetsPerSecond: number;
   currentAssetId: number;
+  lastUsedProxyIndex: number | null;
+  lastUsedCookieIndex: number | null;
   onScan: (callback: (asset: Asset) => any) => any;
 
   constructor(config: Config) {
@@ -21,6 +23,9 @@ class Scanner {
 
     this.currentAssetId = config.startId;
 
+    this.lastUsedProxyIndex = null;
+    this.lastUsedCookieIndex = null;
+
     this.listener = new EventEmitter();
     this.onScan = (callback) => this.listener.on("scan", callback);
     if (this.cookies.length == 0 || this.proxies.length == 0)
@@ -30,4 +35,4 @@ class Scanner {
   }
 }
 
-export {Scanner};
+export { Scanner };
