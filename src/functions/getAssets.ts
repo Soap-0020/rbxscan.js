@@ -56,7 +56,7 @@ const getAssets = async (
     );
     scanner.lastUsedCookieIndex = cookieIndex;
 
-    scanner.lastUsedProxyIndex = fetchPromises.push(
+    fetchPromises.push(
       fetchAssests(
         assets.slice((page - 1) * 50, page * 50),
         scanner.proxies[proxyIndex],
