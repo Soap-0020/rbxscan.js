@@ -8,21 +8,30 @@ import getNextIndex from "./getNextIndex";
 const fetchAssests = async (
   assets: number[],
   proxy: Proxy,
-  cookie: string
+  cookie: string,
+  scanner: Scanner
 ): Promise<Asset[]> => {
   const agent = new HttpsProxyAgent(
     `${proxy.protocol}://${proxy.username}:${proxy.password}@${proxy.host}:${proxy.port}`
   );
 
-  const request = await fetch(
-    `https://develop.roblox.com/v1/assets?assetIds=${assets.join(", ")}`,
-    {
-      headers: {
-        Cookie: cookie,
-      },
-      agent,
-    }
-  );
+  let request;
+
+  try {
+    request = await fetch(
+      `https://develop.roblox.com/v1/assets?assetIds=${assets.join(", ")}`,
+      {
+        headers: {
+          Cookie: cookie,
+        },
+        agent,
+      }
+    );
+  } catch (error: any) {
+    if (scanner.throwUnexpectedErrors) throw new Error(error.message);
+    scanner.listener.emit("error", error);
+    return [];
+  }
 
   if (request.status == 429)
     throw new Error("Rate limited, you may need more cookies or proxies");
@@ -64,7 +73,8 @@ const getAssets = async (
       fetchAssests(
         assets.slice((page - 1) * 50, page * 50),
         scanner.proxies[proxyIndex],
-        scanner.cookies[cookieIndex]
+        scanner.cookies[cookieIndex],
+        scanner
       )
     );
   }

@@ -32,4 +32,9 @@ const scanner = new Scanner({
 scanner.onScan((asset) => {
   console.log(asset.id);
 });
+
+scanner.onError((error) => {
+  // Makes fetch errors not through and be passed through this function
+  console.log(error.message);
+});
 ```

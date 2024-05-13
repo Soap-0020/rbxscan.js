@@ -14,7 +14,9 @@ class Scanner {
   lastUsedProxyIndex: number | null;
   lastUsedCookieIndex: number | null;
   timeout: number;
-  onScan: (callback: (asset: Asset) => any) => any;
+  throwUnexpectedErrors: boolean;
+  onScan: (callback: (asset: Asset) => any) => void;
+  onError: (callback: (error: Error) => any) => void;
 
   constructor(config: Config) {
     this.proxies = config.proxies;
@@ -22,14 +24,19 @@ class Scanner {
     this.startId = config.startId;
     this.assetsPerScan = config.assetsPerScan;
     this.timeout = config.timeout ?? 1000;
-
     this.currentAssetId = config.startId;
 
     this.lastUsedProxyIndex = null;
     this.lastUsedCookieIndex = null;
+    this.throwUnexpectedErrors = true;
 
     this.listener = new EventEmitter();
     this.onScan = (callback) => this.listener.on("scan", callback);
+    this.onError = (callback) => {
+      this.throwUnexpectedErrors = false;
+      this.listener.on("error", callback);
+    };
+
     if (this.cookies.length == 0 || this.proxies.length == 0)
       throw new Error("You need at least 1 cookie and proxy");
 
