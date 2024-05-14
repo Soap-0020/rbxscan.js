@@ -42,6 +42,9 @@ const fetchAssests = async (
     if (json.errors[0].message == "Unauthorized") {
       throw new Error(`Invalid Cookie\n${cookie}`);
     } else {
+      const error = new Error(json.errors[0].message);
+      if (scanner.throwUnexpectedErrors) throw error;
+      scanner.listener.emit("error", error);
       return [];
     }
   }
