@@ -25,6 +25,7 @@ const fetchAssests = async (
           Cookie: cookie,
         },
         agent,
+        signal: AbortSignal.timeout(scanner.abortSignalTimeout),
       }
     );
   } catch (error: any) {

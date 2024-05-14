@@ -15,6 +15,7 @@ class Scanner {
   lastUsedCookieIndex: number | null;
   timeout: number;
   throwUnexpectedErrors: boolean;
+  abortSignalTimeout: number;
   onScan: (callback: (asset: Asset) => any) => void;
   onError: (callback: (error: Error) => any) => void;
 
@@ -24,6 +25,7 @@ class Scanner {
     this.startId = config.startId;
     this.assetsPerScan = config.assetsPerScan;
     this.timeout = config.timeout ?? 1000;
+    this.abortSignalTimeout = config.abortSignalTimeout ?? 5000;
     this.currentAssetId = config.startId;
 
     this.lastUsedProxyIndex = null;

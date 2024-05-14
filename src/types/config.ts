@@ -5,6 +5,7 @@ type Config = {
   startId: number;
   proxies: Proxy[];
   cookies: string[];
+  abortSignalTimeout?: number;
 
   timeout?: number;
 };
