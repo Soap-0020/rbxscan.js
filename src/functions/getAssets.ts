@@ -37,7 +37,16 @@ const fetchAssests = async (
   if (request.status == 429)
     throw new Error("Rate limited, you may need more cookies or proxies");
 
-  const json = await request.json();
+  let json;
+
+  try {
+    json = await request.json();
+  } catch {
+    const error = new Error("Request is not in JSON format");
+    if (scanner.throwUnexpectedErrors) throw error;
+    scanner.listener.emit("error", error);
+    return [];
+  }
 
   if (json?.errors) {
     if (json.errors[0].message == "Unauthorized") {
