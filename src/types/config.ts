@@ -6,7 +6,7 @@ type Config = {
   proxies: Proxy[];
   cookies: string[];
   abortSignalTimeout?: number;
-
+  retryOnRatelimit?: boolean;
   timeout?: number;
 };
 

@@ -9,10 +9,12 @@ Run "npm install rbxscan.js"
 # Usage
 
 ```ts
-import { Scanner } from "rbxscan.js"; // or using the require() funciton
+import { Scanner, Events } from "rbxscan.js"; // or using the require() funciton
 
 const scanner = new Scanner({
-  assetsPerScan: 550,
+  assetsPerScan: 550, // The amount of assets to scan
+  retryOnRatelimit: true, // Rescan an asset (max 3 times) if the requet gets ratelimited
+  abortSignalTimeout: 5000, // The time to abort a request
   timeout: 500, // the speed in ms between each scan (optinal)
   startId: 34324243242, // The starting asset id of the scanner
   proxies: [
@@ -23,18 +25,18 @@ const scanner = new Scanner({
       username: "axxx",
       password: "xxxx",
     },
-  ],
+  ], // The proxys
   cookies: [
     ".ROBLOSECURITY=_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|",
   ],
 });
 
-scanner.onScan((asset) => {
+scanner.on(Events.Scan, (asset) => {
   console.log(asset.id);
 });
 
-scanner.onError((error) => {
-  // Makes fetch errors not through and be passed through this function
+scanner.on(Events.Error, (error) => {
+  // Makes all errors except unauthorized not throw an exeption
   console.log(error.message);
 });
 ```

@@ -1,4 +1,4 @@
-import { Scanner } from "..";
+import { Events, Scanner } from "..";
 import getAssets from "./getAssets";
 
 const startScanning = async (scanner: Scanner): Promise<void> => {
@@ -12,7 +12,10 @@ const startScanning = async (scanner: Scanner): Promise<void> => {
 
     scanner.currentAssetId =
       assets.sort((a, b) => b.id - a.id)[0]?.id ?? scanner.currentAssetId;
-    assets.reverse().forEach((asset) => scanner.listener.emit("scan", asset));
+
+    assets
+      .reverse()
+      .forEach((asset) => scanner.listener.emit(Events.Scan, asset));
 
     await new Promise((e) => setTimeout(e, scanner.timeout));
   }
