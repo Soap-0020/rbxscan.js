@@ -39,8 +39,14 @@ const fetchAssests = async (
       }
     );
   } catch (error: any) {
-    if (scanner.throwUnexpectedErrors) throw new Error(error.message);
-    scanner.listener.emit(Events.Error, error);
+    if (!scanner.throwUnexpectedErrors)
+      scanner.listener.emit(Events.Error, error);
+
+    if (scanner.retryOnError && retriedIndex > 3) {
+      await new Promise((e) => setTimeout(e, (retriedIndex + 1) * 1000));
+      return await fetchAssests(assets, scanner, retriedIndex + 1);
+    } else if (scanner.throwUnexpectedErrors) throw error;
+
     return [];
   }
 
