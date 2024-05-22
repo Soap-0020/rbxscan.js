@@ -15,7 +15,7 @@ class Scanner {
   lastUsedCookieIndex: number | null;
   timeout: number;
   throwUnexpectedErrors: boolean;
-  retryOnRatelimit: boolean;
+  retryOnError: boolean;
   abortSignalTimeout: number;
   on: (event: string, callback: (...params: any[]) => any) => any;
 
@@ -31,7 +31,7 @@ class Scanner {
     this.lastUsedProxyIndex = null;
     this.lastUsedCookieIndex = null;
     this.throwUnexpectedErrors = true;
-    this.retryOnRatelimit = config.retryOnRatelimit ?? false;
+    this.retryOnError = config.retryOnError ?? false;
 
     this.listener = new EventEmitter();
     this.on = (event, callback) => {

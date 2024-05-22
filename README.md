@@ -13,7 +13,7 @@ import { Scanner, Events } from "rbxscan.js"; // or using the require() funciton
 
 const scanner = new Scanner({
   assetsPerScan: 550, // The amount of assets to scan
-  retryOnRatelimit: true, // Rescan an asset (max 3 times) if the requet gets ratelimited
+  retryOnError: true, // Rescan an asset (max 3 times) if the request gets errored/ratelimited
   abortSignalTimeout: 5000, // The time to abort a request
   timeout: 500, // the speed in ms between each scan (optinal)
   startId: 34324243242, // The starting asset id of the scanner

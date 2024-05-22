@@ -52,7 +52,7 @@ const fetchAssests = async (
     if (!scanner.throwUnexpectedErrors)
       scanner.listener.emit(Events.Error, error);
 
-    if (scanner.retryOnRatelimit && retriedIndex > 3) {
+    if (scanner.retryOnError && retriedIndex > 3) {
       await new Promise((e) => setTimeout(e, (retriedIndex + 1) * 1000));
       return await fetchAssests(assets, scanner, retriedIndex + 1);
     } else if (scanner.throwUnexpectedErrors) throw error;
@@ -64,8 +64,14 @@ const fetchAssests = async (
     json = await request.json();
   } catch {
     const error = new Error("Request is not in JSON format");
-    if (scanner.throwUnexpectedErrors) throw error;
-    scanner.listener.emit(Events.Error, error);
+    if (!scanner.throwUnexpectedErrors)
+      scanner.listener.emit(Events.Error, error);
+
+    if (scanner.retryOnError && retriedIndex > 3) {
+      await new Promise((e) => setTimeout(e, (retriedIndex + 1) * 1000));
+      return await fetchAssests(assets, scanner, retriedIndex + 1);
+    } else if (scanner.throwUnexpectedErrors) throw error;
+
     return [];
   }
 
@@ -74,8 +80,14 @@ const fetchAssests = async (
       throw new Error(`Invalid Cookie\n${cookie}`);
     } else {
       const error = new Error(json.errors[0].message);
-      if (scanner.throwUnexpectedErrors) throw error;
-      scanner.listener.emit(Events.Error, error);
+      if (!scanner.throwUnexpectedErrors)
+        scanner.listener.emit(Events.Error, error);
+
+      if (scanner.retryOnError && retriedIndex > 3) {
+        await new Promise((e) => setTimeout(e, (retriedIndex + 1) * 1000));
+        return await fetchAssests(assets, scanner, retriedIndex + 1);
+      } else if (scanner.throwUnexpectedErrors) throw error;
+
       return [];
     }
   }
