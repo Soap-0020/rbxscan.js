@@ -1,3 +1,12 @@
+# [DEPRACTED] As of August 5th, rbxscan.js will be depracated due to a roblox API change relating to asset ID creation.
+
+> Non-sequential IDs apply only to newly created assets.
+> Universe IDs won’t be impacted, as it is not considered an asset.
+> There will be no collisions between existing and new Asset IDs.
+> The number of digits in the Asset ID will expand from 11 to 14 or more.
+
+### You can read more [here](https://devforum.roblox.com/t/non-sequential-asset-id-generation-coming-soon/3082004/1).
+
 # What Is rbxscan.js
 
 rbxscan.js allows you to easily scan roblox assets using proxies
